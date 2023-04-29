@@ -31,7 +31,11 @@ function App(): JSX.Element{
     setTasks(newTasks)
   }
 
- 
+  const removeTasks = (i: number): void => {
+    const newTasks: ITask[] = [...tasks];
+    newTasks.splice(i, 1);
+    setTasks(newTasks);
+  }
 
   return (
     <div className="containter p-4">
@@ -57,7 +61,7 @@ function App(): JSX.Element{
                 <h3 style={{textDecoration: t.done ? 'line-through ': ''}}>{t.name}</h3>
                 <div>
                   <button className="btn btn-secondary" onClick={() => toogleDoneTask(i)}>Done</button>
-                  
+                  <button className="btn btn-secondary" onClick={() => removeTasks(i)}>Delete</button>
                 </div>
               </div>
             })}

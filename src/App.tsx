@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 //type declaration;
 type FormElement = React.FormEvent<HTMLFormElement>;
+type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 interface ITask {
   name: string;
   done: boolean;
@@ -12,14 +13,11 @@ function App(): JSX.Element{
 
   const [newTask, setNewTask] = useState<string>("");
   const [tasks, setTasks] = useState<ITask[]>([]);
+  const [inputError, setInputError] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
-  const handleSubmit = (e: FormElement) => {
-    e.preventDefault();
-    addTasks(newTask);
-    console.log(tasks);
-    setNewTask("");
-  };
-
+ 
+  //functions
   const addTasks = (name: string): void => {
     const setNewTasks: ITask[] = [...tasks, { name, done: false }];
     setTasks(setNewTasks);
@@ -36,7 +34,25 @@ function App(): JSX.Element{
     newTasks.splice(i, 1);
     setTasks(newTasks);
   }
+  // handlers
+  const handlerInputError = (e: ChangeEvent) => {
+    setInputValue(e.target.value)
+    setInputError(false)
+  }
 
+  const handleSubmit = (e: FormElement) => {
+    if (newTask === "") {
+      e.preventDefault();
+      setInputError(true);
+      console.log(inputError)
+    }else{
+      e.preventDefault();
+      addTasks(newTask);
+      console.log(tasks);
+      setNewTask("");
+    }
+  };
+  
   return (
     <div className="containter p-4">
       <div className="row">
@@ -48,10 +64,12 @@ function App(): JSX.Element{
                   type="text"
                   onChange={(e) => {
                     setNewTask(e.target.value);
+                    handlerInputError;
                   }}
                   value={newTask}
-                  className="form-control"
+                  className={inputError ? 'inputError' : 'form-control'}
                   autoFocus
+                  
                 />
                 <button style={{width: "100%"}} className="btn btn-success btn-block mt-2">Save</button>
               </form>

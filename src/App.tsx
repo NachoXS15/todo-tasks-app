@@ -8,9 +8,6 @@ interface ITask {
   done: boolean;
 }
 
-
-
-
 function App(): JSX.Element{
 
   const [newTask, setNewTask] = useState<string>("");
@@ -23,10 +20,18 @@ function App(): JSX.Element{
     setNewTask("");
   };
 
-  const addTasks = (name: string) => {
+  const addTasks = (name: string): void => {
     const setNewTasks: ITask[] = [...tasks, { name, done: false }];
     setTasks(setNewTasks);
   };
+
+  const toogleDoneTask = (i: number): void  => {
+    const newTasks: ITask[] = [...tasks];
+    newTasks[i].done = !newTasks[i].done
+    setTasks(newTasks)
+  }
+
+ 
 
   return (
     <div className="containter p-4">
@@ -44,13 +49,16 @@ function App(): JSX.Element{
                   className="form-control"
                   autoFocus
                 />
-                <button className="btn btn-success btn-block mt-2">Save</button>
+                <button style={{width: "100%"}} className="btn btn-success btn-block mt-2">Save</button>
               </form>
             </div>
             {tasks.map((t: ITask, i: number) => {
-              return <div key={i} className="card card-body mt-2">
-                <h3>{t.name}</h3>;
-                <p>{t.done + ''}</p>
+              return <div key={i} style={{display: "flex", justifyContent: "space-around", gap: "70px"}} className="card-body mt-2">
+                <h3 style={{textDecoration: t.done ? 'line-through ': ''}}>{t.name}</h3>
+                <div>
+                  <button className="btn btn-secondary" onClick={() => toogleDoneTask(i)}>Done</button>
+                  
+                </div>
               </div>
             })}
           </div>

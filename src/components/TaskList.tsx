@@ -1,5 +1,6 @@
 import React from "react";
 import ITask from "../interfaces/iTask";
+import TaskCard from "./TaskCard";
 
 interface Props {
   tasks: ITask[];
@@ -8,14 +9,15 @@ interface Props {
 export default function TaskList({ tasks }: Props) {
   return (
     <>
-      {tasks.map((t: ITask, i: number) => {
-        return (
-          <div className="container p-4">
-            <h1>{t.name}</h1>
-            <p>{t.description}</p>
-          </div> 
-        );
-      })}
+      {
+        tasks.map((task) => (
+          <div className="col-md-4">
+            <TaskCard tasks={task} />
+          </div>
+          
+        ))
+      }
     </>
   );
 }
+ 

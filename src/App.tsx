@@ -15,24 +15,12 @@ type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 function App(): JSX.Element{
 
-  const [tasks, setTasks] = useState<ITask[]>([
-    {
-      id: 1,
-      name: "matar a marco",
-      description: "con una vandal prime",
-      done: false
-    }
-  ]);
-  const [newTask, setNewTask] = useState<string>("");
+  const [tasks, setTasks] = useState<ITask[]>([]);
   const [inputError, setInputError] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
- 
   //functions
-  const addTasks = (name: string): void => {
-    const setNewTasks: ITask[] = [...tasks];
-    setTasks(setNewTasks);
-  };
+  const addTasks = (task: ITask) => setTasks([...tasks, task]);;
 
   // const toogleDoneTask = (i: number): void  => {
   //   const newTasks: ITask[] = [...tasks];
@@ -55,17 +43,13 @@ function App(): JSX.Element{
     <>
       <Header />
       <div className="container p-4">
-        <AddForm />
+        <AddForm addTask={addTasks}/>
         <div className="row">
           <div className="col-md-8">
             <TaskList tasks={tasks}/>
           </div>
         </div>
       </div>
-      
-      
-      
-      
     </>
   );
 }

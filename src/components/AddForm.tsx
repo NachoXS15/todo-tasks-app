@@ -1,29 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 //type definition
-import ITask from "../interfaces/iTask";
-type FormElement = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
-
-// const [tasks, setTasks] = useState({
-//   title: "",
-//   description: "",
-// });
-
-const handleInputChange = ({target}: FormElement) => {
-  console.log(target.name)
+interface Props {
+  addTask: (task: ITask) => void;
 }
+import ITask from "../interfaces/iTask";
+type dataElement = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
+type formElement = FormEvent<HTMLFormElement>
 
-const handleSubmit = (e: FormElement) => {
-  e.preventDefault();
-};
+export default function AddForm({addTask}: Props) {
+  const [task, setTask] = useState({
+    name: "",
+    description: "",
+  });
+  
+  const handleInputChange = ({ target: {name, value} }: dataElement) => {
+    setTask({...task, [name]: value})
+  };
 
-export default function AddForm() {
+  const handleNewTask = (e: formElement):void => {
+    e.preventDefault();
+    addTask(task)
+  };
+  
   return (
     <div className="containter p-4">
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <div className="card">
             <div className="card-body">
-              <form /*onSubmit={handleSubmit}*/>
+              <form onSubmit={handleNewTask}>
                 <input
                   type="text"
                   onChange={handleInputChange}
@@ -32,7 +37,7 @@ export default function AddForm() {
                     /* inputError ? 'inputError' : */ "form-control shadow-none"
                   }
                   autoFocus
-                  name="title"
+                  name="name"
                 />
                 <textarea
                   cols={20}
@@ -41,6 +46,7 @@ export default function AddForm() {
                   placeholder="Introduzca descripcion de tarea"
                   className="form-control mb-3 shadow-none"
                   name="description"
+                  onChange={handleInputChange}
                 ></textarea>
                 <button
                   style={{ width: "100%" }}

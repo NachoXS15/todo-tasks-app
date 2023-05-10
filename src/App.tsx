@@ -7,12 +7,6 @@ import ITask from "./interfaces/iTask";
 import TaskList from "./components/TaskList";
 import Header from "./components/Header";
 
-
-//type declaration;
-type FormElement = React.FormEvent<HTMLFormElement>;
-type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
-
-
 function App(): JSX.Element{
 
   const [tasks, setTasks] = useState<ITask[]>([]);
@@ -24,7 +18,7 @@ function App(): JSX.Element{
 
   const addTasks = (task: ITask) => setTasks([...tasks, {...task, id: getTimestamp(), done: false}]);;
   
-  const removeTasks = (id: number) => setTasks(tasks.splice(id, 1));
+  const removeTasks = (id: number) => setTasks(tasks.filter(tasks => tasks.id !== id));
 
   // const toogleDoneTask = (i: number): void  => {
   //   const newTasks: ITask[] = [...tasks];

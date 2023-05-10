@@ -20,7 +20,11 @@ function App(): JSX.Element{
   const [inputValue, setInputValue] = useState("");
 
   //functions
-  const addTasks = (task: ITask) => setTasks([...tasks, task]);;
+  const getTimestamp = () => new Date().getTime();
+
+  const addTasks = (task: ITask) => setTasks([...tasks, {...task, id: getTimestamp(), done: false}]);;
+  
+  const removeTasks = (id: number) => setTasks(tasks.splice(id, 1));
 
   // const toogleDoneTask = (i: number): void  => {
   //   const newTasks: ITask[] = [...tasks];
@@ -33,6 +37,9 @@ function App(): JSX.Element{
   //   newTasks.splice(i, 1);
   //   setTasks(newTasks);
   // }
+
+  
+
   // // handlers
   // const handlerInputError = (e: ChangeEvent) => {
   //   setInputValue(e.target.value)
@@ -46,7 +53,7 @@ function App(): JSX.Element{
         <AddForm addTask={addTasks}/>
         <div className="row">
           <div className="col-md-8">
-            <TaskList tasks={tasks}/>
+            <TaskList tasks={tasks} removeTasks={removeTasks}/>
           </div>
         </div>
       </div>

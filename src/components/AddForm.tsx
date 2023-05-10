@@ -20,6 +20,10 @@ export default function AddForm({addTask}: Props) {
   const handleNewTask = (e: formElement):void => {
     e.preventDefault();
     addTask(task)
+    setTask({
+      name: "",
+      description: ""
+    })
   };
   
   return (
@@ -38,6 +42,7 @@ export default function AddForm({addTask}: Props) {
                   }
                   autoFocus
                   name="name"
+                  value={task.name}
                 />
                 <textarea
                   cols={20}
@@ -47,6 +52,7 @@ export default function AddForm({addTask}: Props) {
                   className="form-control mb-3 shadow-none"
                   name="description"
                   onChange={handleInputChange}
+                  value={task.description}
                 ></textarea>
                 <button
                   style={{ width: "100%" }}

@@ -7,6 +7,12 @@ import ITask from "./interfaces/iTask";
 import TaskList from "./components/TaskList";
 import Header from "./components/Header";
 
+//To-Do
+  //Save tasks in broswer memory
+  //Update layout
+  //Fix bugs when create an element
+  //
+
 function App(): JSX.Element{
 
   const [tasks, setTasks] = useState<ITask[]>([]);
@@ -25,14 +31,6 @@ function App(): JSX.Element{
   //   newTasks[i].done = !newTasks[i].done
   //   setTasks(newTasks)
   // }
-
-  // const removeTasks = (i: number): void => {
-  //   const newTasks: ITask[] = [...tasks];
-  //   newTasks.splice(i, 1);
-  //   setTasks(newTasks);
-  // }
-
-  
 
   // // handlers
   // const handlerInputError = (e: ChangeEvent) => {

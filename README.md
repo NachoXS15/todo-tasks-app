@@ -1,5 +1,6 @@
 #Task-List-App 
 ---
-Aplicación de lista de tareas creada para poder implementar practicas de React con TypeScript, aplicando estilos con Boostrap y SCSS.
+Tasks List App created to practice React and TypeScript basic. Styles applied using Bootstrap and Scss
+
 
 

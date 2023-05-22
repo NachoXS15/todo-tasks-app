@@ -19,6 +19,10 @@ export default function AddForm({addTask}: Props) {
 
   const handleNewTask = (e: formElement):void => {
     e.preventDefault();
+    if (task.name === "" || task.description === "") {
+      e.preventDefault();
+      alert("introduzca valores");
+    }
     addTask(task)
     setTask({
       name: "",
@@ -38,7 +42,7 @@ export default function AddForm({addTask}: Props) {
                   onChange={handleInputChange}
                   placeholder="Introduzca titulo de tarea"
                   className={
-                    /* inputError ? 'inputError' : */ "form-control shadow-none"
+                    task.name === "" ? 'inputError' : 'form-control shadow-none'
                   }
                   autoFocus
                   name="name"
@@ -49,7 +53,9 @@ export default function AddForm({addTask}: Props) {
                   rows={5}
                   style={{ resize: "none" }}
                   placeholder="Introduzca descripcion de tarea"
-                  className="form-control mb-3 shadow-none"
+                  className={
+                    task.description === '' ? 'inputError' : "form-control mb-3 shadow-none"
+                  }
                   name="description"
                   onChange={handleInputChange}
                   value={task.description}

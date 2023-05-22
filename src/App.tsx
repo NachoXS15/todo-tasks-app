@@ -11,7 +11,6 @@ import Header from "./components/Header";
   //Save tasks in broswer memory
   //Update layout
   //Fix bugs when create an element
-  //
 
 function App(): JSX.Element{
 
@@ -30,12 +29,6 @@ function App(): JSX.Element{
   //   const newTasks: ITask[] = [...tasks];
   //   newTasks[i].done = !newTasks[i].done
   //   setTasks(newTasks)
-  // }
-
-  // // handlers
-  // const handlerInputError = (e: ChangeEvent) => {
-  //   setInputValue(e.target.value)
-  //   setInputError(false)
   // }
 
   return (
